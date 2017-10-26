@@ -8,9 +8,6 @@ import Queue
 import sys, os
 
 server_credentials = 't3://148.87.148.133:49901,/smnh9o/local/smnh9o-WebLogicConfig.properties,/smnh9o/local/smnh9o-WebLogicKey.properties'
-FMT = '%H:%M:%S'
-domain_home='/smnh9o/local/config/domains/soa_domain'
-host = 'vmohsmnhm094.oracleoutsourcing.com'
 
 def server_restart():
     selected_servers = []
@@ -39,7 +36,9 @@ def server_restart():
         for each_server in servers_list:
             if server in each_server.getName():
                 current_machine = each_server.getCurrentMachine()
-        cd("/ServerLifeCycleRuntimes/" + server)
+        cd("/ServerRuntimes/" + server)
+        domain_home = cmo.getCurrentDirectory()[:-1]
+        cd("../../ServerLifeCycleRuntimes/" + server)
         server_state = str(cmo.getState())
         if not (str(server_state).__contains__('SHUTDOWN')):
             shutdown(server, 'Server', force='true')
@@ -60,4 +59,5 @@ def server_restart():
             print 'Waiting for server %s to restart ...' % server
             os.system('sleep 10s')
         print 'Server %s is RUNNING.' % server
+    disconnect()
 server_restart()
