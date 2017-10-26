@@ -4,10 +4,8 @@ import Queue
 # Prints out threads and server status
 # Connect with encrypted password or pass credentials via method arguments
 # Author: Keynes Paul
-# E-mail: keynes.paul@oracle.com
 import sys, os
-
-server_credentials = 't3://148.87.148.133:49901,/smnh9o/local/smnh9o-WebLogicConfig.properties,/smnh9o/local/smnh9o-WebLogicKey.properties'
+server_credentials = 't3://admin-listen-address:admin-listen-port,home-folder-WebLogicConfig.properties,home-folder-WebLogicKey.properties'
 
 def server_restart():
     selected_servers = []
